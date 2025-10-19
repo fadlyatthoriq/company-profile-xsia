@@ -22,30 +22,24 @@ const navItems: CardNavItem[] = [
     bgColor: '#1E293B',
     textColor: '#F8FAFC',
     links: [
-      { label: 'Website Builder', href: '#website' },
-      { label: 'E-Commerce', href: '#ecommerce' },
-      { label: 'Analytics', href: '#analytics' },
-    ],
+      
+    ]
   },
   {
     label: 'Solutions',
     bgColor: '#1E293B',
     textColor: '#F8FAFC',
     links: [
-      { label: 'For Startups', href: '#startups' },
-      { label: 'For Enterprises', href: '#enterprise' },
-      { label: 'Custom Systems', href: '#custom' },
-    ],
+      
+    ]
   },
   {
     label: 'Company',
     bgColor: '#1E293B',
     textColor: '#F8FAFC',
     links: [
-      { label: 'About Us', href: '#about' },
-      { label: 'Careers', href: '#careers' },
-      { label: 'Contact', href: '#contact' },
-    ],
+      
+    ]
   },
 ];
 
