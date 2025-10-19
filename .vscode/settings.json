@@ -1,11 +1,29 @@
 {
-    "typescript.tsdk": "node_modules\\typescript\\lib",
-    "cSpell.words": [
-        "ecommerce",
-        "fract",
-        "gsap",
-        "highp",
-        "lerp",
-        "yoyo"
+  "typescript.tsdk": "node_modules\\typescript\\lib",
+  "cSpell.words": [
+    "ecommerce",
+    "fract",
+    "gsap",
+    "highp",
+    "lerp",
+    "yoyo"
+  ],
+  "files.associations": {
+    "*.css": "tailwindcss"
+  },
+  "tailwindCSS.classAttributes": [
+    "class",
+    "className",
+    "theme"
+  ],
+  "tailwindCSS.experimental.classRegex": [
+    [
+      "twMerge\\(([^)]*)\\)",
+      "[\"'`]([^\"'`]*).*?[\"'`]"
+    ],
+    [
+      "createTheme(?:<\\w+>)?\\s*\\(([^)]*)\\)",
+      "{?\\s?[\\w].*:\\s*?[\"'`]([^\"'`]*).*?,?\\s?}?"
     ]
+  ]
 }
