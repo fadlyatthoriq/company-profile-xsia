@@ -77,28 +77,75 @@ export default function ProjectOverviewSection() {
             </div>
 
             {/* Cards */}
-            <div className="project-cards relative z-10 flex-1 w-full flex items-center justify-center lg:pl-8" style={{ minHeight: '500px', maxHeight: '75vh' }}>
+            <div
+                className="project-cards relative z-10 flex-1 w-full flex items-center justify-center lg:pl-8"
+                style={{ minHeight: '500px', maxHeight: '75vh' }}
+            >
                 <CardSwap {...cardSwapProps}>
-                    {[1, 2, 3].map((num) => (
-                        <Card key={num}>
-                            <div className="absolute inset-0 flex flex-col overflow-hidden 
-                    bg-[#0F172A]/90 border border-[#38BDF8]/10 rounded-3xl backdrop-blur-2xl 
-                    shadow-[0_0_40px_rgba(0,255,255,0.1)] p-10 flex justify-center items-center text-center space-y-6">
-                                <h3 className="text-7xl font-bold bg-gradient-to-r from-[#00FFFF] to-[#38BDF8] bg-clip-text text-transparent">
-                                    {num}
-                                </h3>
-                                <p className="text-[#94A3B8] text-base leading-relaxed">
-                                    Futuristic solution {num} crafted with efficiency and precision for your business growth.
-                                </p>
-                                <div className="flex gap-2">
-                                    <span className="px-3 py-1 rounded-full bg-[#00FFFF]/10 border border-[#00FFFF]/30 text-xs text-[#00FFFF]">Cyan Flow</span>
-                                    <span className="px-3 py-1 rounded-full bg-[#38BDF8]/10 border border-[#38BDF8]/30 text-xs text-[#38BDF8]">Adaptive</span>
-                                </div>
+                    {/* Card 1 */}
+                    <Card>
+                        <div className="absolute inset-0 flex flex-col overflow-hidden bg-[#0F172A]/90 border border-[#38BDF8]/10 rounded-3xl backdrop-blur-2xl  shadow-[0_0_40px_rgba(0,255,255,0.1)] p-10 flex justify-center items-center text-center space-y-6">
+                            <h3 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-[#00FFFF] to-[#38BDF8] bg-clip-text text-transparent">
+                                Enterprise Resource Planning (ERP)
+                            </h3>
+                            <p className="text-[#94A3B8] text-base leading-relaxed max-w-md">
+                                A powerful integrated solution designed to streamline operations,
+                                improve collaboration, and enhance decision-making across your business ecosystem.
+                            </p>
+                            <div className="flex gap-2 flex-wrap justify-center">
+                                <span className="px-3 py-1 rounded-full bg-[#00FFFF]/10 border border-[#00FFFF]/30 text-xs text-[#00FFFF]">
+                                    Integration
+                                </span>
+                                <span className="px-3 py-1 rounded-full bg-[#38BDF8]/10 border border-[#38BDF8]/30 text-xs text-[#38BDF8]">
+                                    Efficiency
+                                </span>
                             </div>
-                        </Card>
-                    ))}
+                        </div>
+                    </Card>
+
+                    {/* Card 2 */}
+                    <Card>
+                        <div className="absolute inset-0 flex flex-col overflow-hidden bg-[#0F172A]/90 border border-[#38BDF8]/10 rounded-3xl backdrop-blur-2xl shadow-[0_0_40px_rgba(0,255,255,0.1)] p-10 flex justify-center items-center text-center space-y-6">
+                            <h3 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-[#00FFFF] to-[#38BDF8] bg-clip-text text-transparent">
+                                Tracking Application
+                            </h3>
+                            <p className="text-[#94A3B8] text-base leading-relaxed max-w-md">
+                                Real-time monitoring system that ensures accurate and efficient asset tracking,
+                                keeping your business connected and data-driven anywhere, anytime.
+                            </p>
+                            <div className="flex gap-2 flex-wrap justify-center">
+                                <span className="px-3 py-1 rounded-full bg-[#00FFFF]/10 border border-[#00FFFF]/30 text-xs text-[#00FFFF]">
+                                    Realtime
+                                </span>
+                                <span className="px-3 py-1 rounded-full bg-[#38BDF8]/10 border border-[#38BDF8]/30 text-xs text-[#38BDF8]">
+                                    Precision
+                                </span>
+                            </div>
+                        </div>
+                    </Card>
+
+                    {/* Card 3 */}
+                    <Card>
+                        <div className="absolute inset-0 flex flex-col overflow-hidden bg-[#0F172A]/90 border border-[#38BDF8]/10 rounded-3xl backdrop-blur-2xl shadow-[0_0_40px_rgba(0,255,255,0.1)] p-10 flex justify-center items-center text-center space-y-6">
+                            <h3 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-[#00FFFF] to-[#38BDF8] bg-clip-text text-transparent">
+                                Inventory Management
+                            </h3>
+                            <p className="text-[#94A3B8] text-base leading-relaxed max-w-md">
+                                Smart inventory management system designed to maintain stock accuracy,
+                                automate workflows, and reduce operational costs efficiently.
+                            </p>
+                            <div className="flex gap-2 flex-wrap justify-center">
+                                <span className="px-3 py-1 rounded-full bg-[#00FFFF]/10 border border-[#00FFFF]/30 text-xs text-[#00FFFF]">
+                                    Automation
+                                </span>
+                                <span className="px-3 py-1 rounded-full bg-[#38BDF8]/10 border border-[#38BDF8]/30 text-xs text-[#38BDF8]">
+                                    Optimization
+                                </span>
+                            </div>
+                        </div>
+                    </Card>
                 </CardSwap>
             </div>
-        </section>
+        </section >
     );
 }
