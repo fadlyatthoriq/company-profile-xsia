@@ -6,8 +6,6 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import HeroSection from '@/components/Hero/HeroSection';
 import ProjectsOverviewSection from '@/components/Project/ProjectOverviewSection';
 
-import SmoothScrollProvider from '@/components/SmoothScrollProvider';
-
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Home() {
@@ -83,11 +81,9 @@ export default function Home() {
   
 
   return (
-    <SmoothScrollProvider>
       <main className="relative text-[#F8FAFC] overflow-hidden">
         <HeroSection />
         <ProjectsOverviewSection />
       </main>
-    </SmoothScrollProvider>
   );
 }

@@ -18,28 +18,22 @@ const poppins = Poppins({
 
 const navItems: CardNavItem[] = [
   {
-    label: 'Products',
-    bgColor: '#1E293B',
-    textColor: '#F8FAFC',
-    links: [
-      
-    ]
+    label: "Products",
+    bgColor: "#1E293B",
+    textColor: "#F8FAFC",
+    links: [],
   },
   {
-    label: 'Solutions',
-    bgColor: '#1E293B',
-    textColor: '#F8FAFC',
-    links: [
-      
-    ]
+    label: "Solutions",
+    bgColor: "#1E293B",
+    textColor: "#F8FAFC",
+    links: [],
   },
   {
-    label: 'Company',
-    bgColor: '#1E293B',
-    textColor: '#F8FAFC',
-    links: [
-      
-    ]
+    label: "Company",
+    bgColor: "#1E293B",
+    textColor: "#F8FAFC",
+    links: [],
   },
 ];
 
@@ -71,7 +65,10 @@ export default function RootLayout({
           buttonTextColor="#F8FAFC"
           ease="power3.out"
         />
-        <SmoothScrollProvider>{children}</SmoothScrollProvider>
+
+        <SmoothScrollProvider>
+          <main>{children}</main>
+        </SmoothScrollProvider>
       </body>
     </html>
   );
