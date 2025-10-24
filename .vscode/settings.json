@@ -1,11 +1,16 @@
 {
   "typescript.tsdk": "node_modules\\typescript\\lib",
   "cSpell.words": [
+    "aksesibilitas",
     "ecommerce",
+    "efek",
+    "flowbite",
     "fract",
+    "grayscale",
     "gsap",
     "highp",
     "lerp",
+    "oklch",
     "yoyo"
   ],
   "files.associations": {

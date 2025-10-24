@@ -37,7 +37,8 @@ export default function ProjectOverviewSection() {
             id="projects-overview"
             data-parallax
             className="relative flex flex-col md:flex-row items-center justify-center overflow-hidden 
-            bg-[#1E293B] px-8 md:px-16 lg:px-20 py-32 text-[#F8FAFC]"
+  bg-gradient-to-b from-[#0D0716] via-[#120A1D] to-[#170D27]
+  px-8 md:px-16 lg:px-20 py-32 text-[#F8FAFC]"
         >
             {/* Parallax Background */}
             <div className="parallax-bg absolute inset-0 pointer-events-none">
@@ -50,12 +51,12 @@ export default function ProjectOverviewSection() {
                 className="absolute inset-0 opacity-[0.03] pointer-events-none"
                 style={{
                     backgroundImage: `linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
-                               linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)`,
+                         linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)`,
                     backgroundSize: '50px 50px',
                 }}
             />
 
-            {/* Text */}
+            {/* Text Section */}
             <div className="reveal-group relative z-10 flex-1 text-center md:text-left space-y-6 max-w-xl md:pr-12 parallax-content mb-12 md:mb-0">
                 <div className="reveal-item inline-block">
                     <span className="px-4 py-2 rounded-full bg-[#0F172A]/60 border border-[#38BDF8]/20 text-sm text-[#38BDF8] font-medium">
@@ -76,7 +77,7 @@ export default function ProjectOverviewSection() {
                 </p>
             </div>
 
-            {/* Cards */}
+            {/* Cards Section */}
             <div
                 className="project-cards relative z-10 flex-1 w-full flex items-center justify-center lg:pl-8"
                 style={{ minHeight: '500px', maxHeight: '75vh' }}
@@ -84,7 +85,7 @@ export default function ProjectOverviewSection() {
                 <CardSwap {...cardSwapProps}>
                     {/* Card 1 */}
                     <Card>
-                        <div className="absolute inset-0 flex flex-col overflow-hidden bg-[#0F172A]/90 border border-[#38BDF8]/10 rounded-3xl backdrop-blur-2xl  shadow-[0_0_40px_rgba(0,255,255,0.1)] p-10 flex justify-center items-center text-center space-y-6">
+                        <div className="absolute inset-0 flex flex-col overflow-hidden bg-[#0F172A]/90 border border-[#38BDF8]/10 rounded-3xl backdrop-blur-2xl shadow-[0_0_40px_rgba(0,255,255,0.1)] p-10 flex justify-center items-center text-center space-y-6">
                             <h3 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-[#00FFFF] to-[#38BDF8] bg-clip-text text-transparent">
                                 Enterprise Resource Planning (ERP)
                             </h3>
@@ -146,6 +147,7 @@ export default function ProjectOverviewSection() {
                     </Card>
                 </CardSwap>
             </div>
-        </section >
+        </section>
+
     );
 }

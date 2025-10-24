@@ -152,7 +152,6 @@
     color: var(--color-foreground);
     font-family: var(--font-body);
     scroll-behavior: auto !important;
-    background-color: #0b0b16;
     overflow: hidden;
     margin: 0;
   }

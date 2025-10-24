@@ -37,7 +37,7 @@ export const Card = forwardRef<HTMLDivElement, CardProps>(
       className={`
         absolute top-1/2 left-1/2 
         rounded-2xl border border-white/10 
-        bg-gradient-to-b from-[#1b1328]/90 to-[#0b0517]/90 
+        bg-gradient-to-b from-[#0F172A]/90 to-[#0b0517]/90 
         shadow-[0_0_40px_-10px_rgba(168,85,247,0.25)]
         backdrop-blur-md
         [transform-style:preserve-3d] [will-change:transform] [backface-visibility:hidden]
