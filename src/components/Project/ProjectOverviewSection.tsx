@@ -37,14 +37,9 @@ export default function ProjectOverviewSection() {
             id="projects-overview"
             data-parallax
             className="relative flex flex-col md:flex-row items-center justify-center overflow-hidden 
-  bg-gradient-to-b from-[#0D0716] via-[#120A1D] to-[#170D27]
-  px-8 md:px-16 lg:px-20 py-32 text-[#F8FAFC]"
+                bg-gradient-to-b from-[#0D0716] via-[#120A1D] to-[#170D27]
+                px-8 md:px-16 lg:px-20 py-32 text-[#F8FAFC]"
         >
-            {/* Parallax Background */}
-            <div className="parallax-bg absolute inset-0 pointer-events-none">
-                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-[#00FFFF]/10 via-transparent to-transparent blur-3xl" />
-                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,_var(--tw-gradient-stops))] from-[#38BDF8]/10 via-transparent to-transparent blur-3xl" />
-            </div>
 
             {/* Grid Overlay */}
             <div

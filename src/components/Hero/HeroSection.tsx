@@ -9,8 +9,9 @@ export default function HeroSection() {
     <section
       id="hero"
       data-parallax
-      className="relative flex flex-col items-center justify-center min-h-screen py-20 sm:py-28 lg:py-36 overflow-hidden bg-gradient-to-b from-[#0F172A] via-[#1E293B] to-[#0D0716]">
-      {/* Background Light Rays */}
+      className="relative flex flex-col items-center justify-center min-h-screen py-20 sm:py-28 lg:py-36 overflow-hidden 
+      bg-gradient-to-b from-[#0F172A] via-[#1E293B] to-[#0D0716]"
+    >
       <div className="absolute inset-0 z-0">
         <LightRays
           raysOrigin="top-center"

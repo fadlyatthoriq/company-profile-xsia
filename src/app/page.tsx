@@ -5,6 +5,7 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import HeroSection from '@/components/Hero/HeroSection';
 import ProjectsOverviewSection from '@/components/Project/ProjectOverviewSection';
+import ProductsSection from '@/components/Products/ProductsSection';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -84,6 +85,7 @@ export default function Home() {
       <main className="relative text-[#F8FAFC] overflow-hidden">
         <HeroSection />
         <ProjectsOverviewSection />
+        <ProductsSection />
       </main>
   );
 }

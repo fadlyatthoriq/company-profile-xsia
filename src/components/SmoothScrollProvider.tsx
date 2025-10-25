@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useRef, useState, createContext, useContext } from 'react';
+import React, { useEffect, useRef, createContext, useContext } from 'react';
 import Lenis from '@studio-freight/lenis';
 
 interface SmoothScrollContextProps {
@@ -17,31 +17,48 @@ interface SmoothScrollProviderProps {
 
 const SmoothScrollProvider: React.FC<SmoothScrollProviderProps> = ({ children }) => {
   const lenisRef = useRef<Lenis | null>(null);
-  const [lenisReady, setLenisReady] = useState(false);
+  const rafRef = useRef<number | null>(null);
 
   useEffect(() => {
-    if (!lenisRef.current) {
-      lenisRef.current = new Lenis({
-        duration: 1.2,
-        lerp: 0.1,
-        touchMultiplier: 1.5, 
-        wheelMultiplier: 1.2, 
-        infinite: false,
-      });
+    const isMobile = 
+      /iPhone|iPad|iPod|Android/i.test(navigator.userAgent) || 
+      window.innerWidth < 769 ||
+      ('ontouchstart' in window) ||
+      (navigator.maxTouchPoints > 0);
 
-      function raf(time: number) {
-        lenisRef.current?.raf(time);
-        requestAnimationFrame(raf);
-      }
-      requestAnimationFrame(raf);
-
-      setLenisReady(true);
+    if (isMobile) {
+      document.documentElement.classList.remove('lenis');
+      document.documentElement.style.overflow = 'auto';
+      document.body.style.overflow = 'auto';
+      return;
     }
 
+    document.documentElement.classList.add('lenis');
+
+    lenisRef.current = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      orientation: 'vertical',
+      gestureOrientation: 'vertical',
+      smoothWheel: true,
+      wheelMultiplier: 1.0,
+      touchMultiplier: 2,
+      infinite: false,
+    });
+
+    function raf(time: number) {
+      lenisRef.current?.raf(time);
+      rafRef.current = requestAnimationFrame(raf);
+    }
+    rafRef.current = requestAnimationFrame(raf);
+
     return () => {
+      if (rafRef.current) {
+        cancelAnimationFrame(rafRef.current);
+      }
       lenisRef.current?.destroy();
       lenisRef.current = null;
-      setLenisReady(false);
+      document.documentElement.classList.remove('lenis');
     };
   }, []);
 
