@@ -91,8 +91,8 @@ export default function FooterSection() {
 
         {/* Copyright */}
         <div className="mt-20 border-t border-white/10 pt-8 text-center text-gray-400 text-sm">
-          © {new Date().getFullYear()} Crafted with <span className="text-pink-400">♥</span> by
-          <span className="text-cyan-400 font-medium"> AI Innovators</span>.
+          © {new Date().getFullYear()} Copyright by
+          <span className="text-cyan-400 font-medium"> PT xSia System</span>.
         </div>
       </div>
     </footer>
