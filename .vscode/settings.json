@@ -1,7 +1,9 @@
 {
   "typescript.tsdk": "node_modules\\typescript\\lib",
   "cSpell.words": [
+    "aboutus",
     "aksesibilitas",
+    "dockrp",
     "ecommerce",
     "efek",
     "flowbite",
@@ -12,6 +14,9 @@
     "lerp",
     "oklch",
     "overscroll",
+    "productpage",
+    "schoolrp",
+    "shoprp",
     "yoyo"
   ],
   "files.associations": {

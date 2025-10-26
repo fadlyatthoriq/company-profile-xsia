@@ -6,15 +6,16 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import HeroSection from '@/components/Hero/HeroSection';
 import ProjectsOverviewSection from '@/components/Project/ProjectOverviewSection';
 import ProductsSection from '@/components/Products/ProductsSection';
+import ContactSection from '@/components/Contact/ContactSection';
+import FooterSection from '@/components/Footer/FooterSection';
+import BackToTopButton from '@/components/BackToTopButton';
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Home() {
-  /* ===========================================================
-   * ⚙️ SCROLL ANIMATIONS
-   * =========================================================== */
   useEffect(() => {
     const ctx = gsap.context(() => {
+      // === PARALLAX SECTION ===
       gsap.utils.toArray<HTMLElement>('section[data-parallax]').forEach((section) => {
         const content = section.querySelector('.parallax-content');
         if (content) {
@@ -35,6 +36,7 @@ export default function Home() {
         }
       });
 
+      // === REVEAL GROUPS ===
       gsap.utils.toArray<HTMLElement>('.reveal-group').forEach((group) => {
         const items = group.querySelectorAll('.reveal-item');
         gsap.fromTo(
@@ -56,6 +58,7 @@ export default function Home() {
         );
       });
 
+      // === PROJECTS PARALLAX BG ===
       gsap.to('#projects-overview .parallax-bg', {
         yPercent: 30,
         ease: 'none',
@@ -66,26 +69,19 @@ export default function Home() {
           scrub: 1.5,
         },
       });
-
-      gsap.to('.float-element', {
-        y: -15,
-        duration: 3,
-        ease: 'power1.inOut',
-        repeat: -1,
-        yoyo: true,
-        stagger: 0.5,
-      });
     });
 
     return () => ctx.revert();
   }, []);
-  
 
   return (
-      <main className="relative text-[#F8FAFC] overflow-hidden">
-        <HeroSection />
-        <ProjectsOverviewSection />
-        <ProductsSection />
-      </main>
+    <main className="relative text-[#F8FAFC] overflow-hidden">
+      <HeroSection />
+      <ProjectsOverviewSection />
+      <ProductsSection />
+      <ContactSection />
+      <FooterSection />
+      <BackToTopButton />
+    </main>
   );
 }

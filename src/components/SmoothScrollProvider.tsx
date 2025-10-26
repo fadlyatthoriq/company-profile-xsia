@@ -36,6 +36,7 @@ const SmoothScrollProvider: React.FC<SmoothScrollProviderProps> = ({ children })
     document.documentElement.classList.add('lenis');
 
     lenisRef.current = new Lenis({
+      lerp: 0.1,
       duration: 1.2,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       orientation: 'vertical',
