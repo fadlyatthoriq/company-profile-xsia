@@ -3,6 +3,9 @@ import { Exo_2, Poppins } from "next/font/google";
 import "./globals.css";
 import SmoothScrollProvider from "@/components/SmoothScrollProvider";
 import CardNav, { CardNavItem } from "@/components/Navbar/CardNav";
+import FooterSection from '@/components/Footer/FooterSection';
+import BackToTopButton from '@/components/BackToTopButton';
+
 
 const exo2 = Exo_2({
   variable: "--font-exo2",
@@ -18,22 +21,27 @@ const poppins = Poppins({
 
 const navItems: CardNavItem[] = [
   {
-    label: "Products",
-    bgColor: "#1E293B",
-    textColor: "#F8FAFC",
-    links: [],
-  },
-  {
-    label: "Solutions",
-    bgColor: "#1E293B",
-    textColor: "#F8FAFC",
-    links: [],
-  },
-  {
     label: "Company",
     bgColor: "#1E293B",
     textColor: "#F8FAFC",
-    links: [],
+    links: [
+      { label: "Home", ariaLabel: "Home Page", href: "/" },
+      { label: "About", ariaLabel: "About Company", href: "/about" },
+      { label: "Service", ariaLabel: "Our Services", href: "/#projects-overview" },
+      { label: "Products", ariaLabel: "Our Products", href: "/#our-products" },
+      { label: "Contact Us", ariaLabel: "Contact Us", href: "/#contact" },
+
+    ],
+  },
+  {
+    label: "Products",
+    bgColor: "#1E293B",
+    textColor: "#F8FAFC",
+    links: [
+       { label: "Dock-RP", ariaLabel: "About Dock-RP", href: "/dockrp-productpage" },
+       { label: "Shop-RP", ariaLabel: "About Shop-RP", href: "/shoprp-productpage" },
+       { label: "School-RP", ariaLabel: "About School-RP", href: "/schoolrp-productpage" },
+    ],
   },
 ];
 
@@ -67,7 +75,12 @@ export default function RootLayout({
         />
 
         <SmoothScrollProvider>
-          <main>{children}</main>
+          <main>
+            {children}
+            <FooterSection />
+            <BackToTopButton />
+          </main>
+
         </SmoothScrollProvider>
       </body>
     </html>

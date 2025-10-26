@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import LightRays from '@/components/Hero/LightRays';
+import LightRays from '@/components/LightRays';
 import GradientText from '@/components/Hero/GradientText';
 
 export default function HeroSection() {
@@ -50,7 +50,7 @@ export default function HeroSection() {
           {/* CTA Buttons - Responsive */}
           <div className="reveal-item w-full flex flex-col sm:flex-row gap-4 sm:gap-5 justify-center items-center px-4 max-w-md sm:max-w-none mx-auto">
             <Link
-              href="#"
+              href="#contact"
               className="group w-full sm:w-auto px-8 sm:px-10 h-12 sm:h-14 rounded-full flex items-center justify-center gap-x-3 
                     bg-[#00FFFF]/20 border border-[#00FFFF]/40 text-[#F8FAFC] font-semibold text-base sm:text-lg 
                     hover:shadow-[0_0_30px_#00FFFF80] hover:scale-105 transition-all duration-300 ease-out"

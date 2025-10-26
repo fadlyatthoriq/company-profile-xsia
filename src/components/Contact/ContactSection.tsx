@@ -8,44 +8,69 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function ContactSection() {
   useEffect(() => {
-    const contact = document.querySelector('#contact');
-    if (!contact) return;
+    const ctx = gsap.context(() => {
+      const contact = document.querySelector('#contact');
+      if (!contact) return;
 
-    const heading = contact.querySelectorAll('h2, p.text-lg');
-    const contactItems = contact.querySelectorAll('.contact-item');
+      const heading = contact.querySelectorAll('h2, p.text-lg, p.text-base');
+      const contactItems = contact.querySelectorAll('.contact-item');
+      const form = contact.querySelector('form');
 
-    // Heading fade-in
-    gsap.from(heading, {
-      opacity: 0,
-      y: 40,
-      filter: 'blur(8px)',
-      duration: 1,
-      ease: 'power3.out',
-      stagger: 0.1,
-      scrollTrigger: {
-        trigger: contact,
-        start: 'top 80%',
-        toggleActions: 'play none none reverse',
-      },
+      // === Heading fade-in (judul dan paragraf pembuka) ===
+      gsap.from(heading, {
+        opacity: 0,
+        y: 50,
+        filter: 'blur(10px)',
+        duration: 1.2,
+        ease: 'power3.out',
+        stagger: 0.15,
+        scrollTrigger: {
+          trigger: contact,
+          start: 'top 85%',
+          toggleActions: 'play none none reverse',
+        },
+      });
+
+      // === Contact Info Items (Phone, Email, Office, Hours) ===
+      gsap.from(contactItems, {
+        opacity: 0,
+        x: -60,
+        duration: 0.8,
+        ease: 'power2.out',
+        stagger: 0.2,
+        scrollTrigger: {
+          trigger: contact,
+          start: 'top 75%',
+          toggleActions: 'play none none reverse',
+        },
+      });
+
+      // === Form Fade-In from Right ===
+      gsap.from(form, {
+        opacity: 0,
+        x: 60,
+        duration: 1,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: form,
+          start: 'top 80%',
+          toggleActions: 'play none none reverse',
+        },
+      });
+
+      // === Subtle background glow pulse ===
+      gsap.to('.bg-cyan-500\\/10, .bg-purple-500\\/10', {
+        opacity: 0.7,
+        scale: 1.05,
+        duration: 3,
+        ease: 'sine.inOut',
+        repeat: -1,
+        yoyo: true,
+      });
     });
 
-    // Contact info items (Phone, Email, etc)
-    gsap.from(contactItems, {
-      opacity: 0,
-      x: -50,
-      duration: 0.8,
-      stagger: 0.15,
-      ease: 'power2.out',
-      scrollTrigger: {
-        trigger: contact,
-        start: 'top 75%',
-        toggleActions: 'play none none reverse',
-      },
-    });
-
-    return () => {
-      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
-    };
+    // Cleanup animasi & scroll triggers dengan aman
+    return () => ctx.revert();
   }, []);
 
   return (
@@ -53,7 +78,7 @@ export default function ContactSection() {
       id="contact"
       className="relative overflow-hidden py-24 px-6 md:px-12 lg:px-24 bg-gradient-to-b from-[#0F172A] via-[#1E2335] to-[#0F172A] text-gray-300"
     >
-      {/* Subtle glow elements */}
+      {/* Background glow elements */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-1/3 left-1/4 w-96 h-96 bg-cyan-500/10 rounded-full blur-[100px]" />
         <div className="absolute bottom-0 right-1/3 w-96 h-96 bg-purple-500/10 rounded-full blur-[100px]" />
@@ -71,6 +96,7 @@ export default function ContactSection() {
         />
       </div>
 
+      {/* Main content */}
       <div className="relative max-w-7xl mx-auto z-10">
         {/* Header */}
         <div className="text-center mb-16">
@@ -81,8 +107,7 @@ export default function ContactSection() {
             Contact Us
           </h2>
           <p className="text-lg text-gray-400 max-w-3xl mx-auto leading-relaxed">
-            Have questions or ready to start your project? Reach out and let&apos;s
-            build something extraordinary together.
+            Have questions or ready to start your project? Reach out and let&apos;s build something extraordinary together.
           </p>
         </div>
 
@@ -184,10 +209,7 @@ export default function ContactSection() {
             <form className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <label
-                    htmlFor="name"
-                    className="block text-gray-300 font-medium mb-2"
-                  >
+                  <label htmlFor="name" className="block text-gray-300 font-medium mb-2">
                     Full Name
                   </label>
                   <input
@@ -198,10 +220,7 @@ export default function ContactSection() {
                   />
                 </div>
                 <div>
-                  <label
-                    htmlFor="email"
-                    className="block text-gray-300 font-medium mb-2"
-                  >
+                  <label htmlFor="email" className="block text-gray-300 font-medium mb-2">
                     Email Address
                   </label>
                   <input
@@ -214,10 +233,7 @@ export default function ContactSection() {
               </div>
 
               <div>
-                <label
-                  htmlFor="subject"
-                  className="block text-gray-300 font-medium mb-2"
-                >
+                <label htmlFor="subject" className="block text-gray-300 font-medium mb-2">
                   Subject
                 </label>
                 <input
@@ -229,10 +245,7 @@ export default function ContactSection() {
               </div>
 
               <div>
-                <label
-                  htmlFor="message"
-                  className="block text-gray-300 font-medium mb-2"
-                >
+                <label htmlFor="message" className="block text-gray-300 font-medium mb-2">
                   Message
                 </label>
                 <textarea

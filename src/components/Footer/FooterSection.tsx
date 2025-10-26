@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 export default function FooterSection() {
   return (
     <footer className="relative overflow-hidden bg-gradient-to-b from-[#0F172A] via-[#1A1D2B] to-[#0F172A] text-gray-300">
@@ -27,7 +29,7 @@ export default function FooterSection() {
 
             {/* Social Icons */}
             <div className="flex space-x-4">
-              <a href="#" target="_blank" className="hover:text-cyan-400 transition-colors">
+              <Link href="#" target="_blank" className="hover:text-cyan-400 transition-colors">
                 <span className="sr-only">LinkedIn</span>
                 <svg fill="currentColor" viewBox="0 0 24 24" className="h-6 w-6" aria-hidden="true">
                   <path
@@ -36,14 +38,14 @@ export default function FooterSection() {
                     clipRule="evenodd"
                   />
                 </svg>
-              </a>
+              </Link>
 
-              <a href="#" target="_blank" className="hover:text-cyan-400 transition-colors">
+              <Link href="#" target="_blank" className="hover:text-cyan-400 transition-colors">
                 <span className="sr-only">Twitter</span>
                 <svg fill="currentColor" viewBox="0 0 24 24" className="h-6 w-6" aria-hidden="true">
                   <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" />
                 </svg>
-              </a>
+              </Link>
             </div>
           </div>
 
@@ -61,10 +63,11 @@ export default function FooterSection() {
               {
                 title: 'Company',
                 links: [
-                  ['About Us', '/aboutus'],
-                  ['Our Services', '#projects-overview'],
-                  ['Our Products', '#products'],
-                  ['Contact Us', '#contact'],
+                  ['Home', '/'],
+                  ['About Us', '/about'],
+                  ['Our Services', '/#projects-overview'],
+                  ['Our Products', '/#our-products'],
+                  ['Contact Us', '/#contact'],
                 ],
               },
             ].map((section, i) => (
@@ -75,9 +78,9 @@ export default function FooterSection() {
                 <ul className="space-y-3">
                   {section.links.map(([name, href]) => (
                     <li key={href}>
-                      <a href={href} className="text-gray-400 hover:text-cyan-300 transition-colors">
+                      <Link href={href} className="text-gray-400 hover:text-cyan-300 transition-colors">
                         {name}
-                      </a>
+                      </Link>
                     </li>
                   ))}
                 </ul>

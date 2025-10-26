@@ -7,8 +7,6 @@ import HeroSection from '@/components/Hero/HeroSection';
 import ProjectsOverviewSection from '@/components/Project/ProjectOverviewSection';
 import ProductsSection from '@/components/Products/ProductsSection';
 import ContactSection from '@/components/Contact/ContactSection';
-import FooterSection from '@/components/Footer/FooterSection';
-import BackToTopButton from '@/components/BackToTopButton';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -57,18 +55,6 @@ export default function Home() {
           }
         );
       });
-
-      // === PROJECTS PARALLAX BG ===
-      gsap.to('#projects-overview .parallax-bg', {
-        yPercent: 30,
-        ease: 'none',
-        scrollTrigger: {
-          trigger: '#projects-overview',
-          start: 'top bottom',
-          end: 'bottom top',
-          scrub: 1.5,
-        },
-      });
     });
 
     return () => ctx.revert();
@@ -80,8 +66,6 @@ export default function Home() {
       <ProjectsOverviewSection />
       <ProductsSection />
       <ContactSection />
-      <FooterSection />
-      <BackToTopButton />
     </main>
   );
 }
