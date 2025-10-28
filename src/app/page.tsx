@@ -3,10 +3,10 @@
 import { useEffect } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import HeroSection from '@/components/Hero/HeroSection';
-import ProjectsOverviewSection from '@/components/Project/ProjectOverviewSection';
-import ProductsSection from '@/components/Products/ProductsSection';
-import ContactSection from '@/components/Contact/ContactSection';
+import HeroSection from '@/components/Main Component/Hero/HeroSection';
+import ProjectsOverviewSection from '@/components/Main Component/Project/ProjectOverviewSection';
+import ProductsSection from '@/components/Main Component/Products/ProductsSection';
+import ContactSection from '@/components/Main Component/Contact/ContactSection';
 
 gsap.registerPlugin(ScrollTrigger);
 

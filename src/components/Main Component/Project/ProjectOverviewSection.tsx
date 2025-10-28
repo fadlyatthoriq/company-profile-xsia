@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import CardSwap, { Card } from '@/components/Project/CardSwap';
+import CardSwap, { Card } from '@/components/Main Component/Project/CardSwap';
 
 export default function ProjectOverviewSection() {
     const [screenWidth, setScreenWidth] = useState(0);

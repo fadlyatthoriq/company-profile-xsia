@@ -4,7 +4,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
 :root {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -196,5 +195,49 @@
 
   .scroll-stack-card {
     transition: transform 0.2s ease-out, filter 0.2s ease-out;
+  }
+
+  @keyframes float {
+    0% {
+      transform: translateY(0);
+      opacity: 0.8;
+    }
+    50% {
+      transform: translateY(-15px);
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(0);
+      opacity: 0.8;
+    }
+  }
+
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  @keyframes fade-in-up {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-fade-in-up {
+    animation: fade-in-up 1s ease forwards;
+  }
+
+  .animate-fade-in-up-delay {
+    animation: fade-in-up 1s ease forwards;
+    animation-delay: 0.5s;
+  }
+
+  .animate-fade-in-up-delay-2 {
+    animation: fade-in-up 1s ease forwards;
+    animation-delay: 1s;
   }
 }

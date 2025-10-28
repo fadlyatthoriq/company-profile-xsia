@@ -1,26 +1,66 @@
-import LightRays from '@/components/LightRays';
+'use client';
+
+import { useEffect } from 'react';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import HeroSection from '@/components/About Component/Hero/HeroSection';
+
+gsap.registerPlugin(ScrollTrigger);
+
 
 export default function AboutPage() {
+    useEffect(() => {
+        const ctx = gsap.context(() => {
+            // === PARALLAX SECTION ===
+            gsap.utils.toArray<HTMLElement>('section[data-parallax]').forEach((section) => {
+                const content = section.querySelector('.parallax-content');
+                if (content) {
+                    gsap.fromTo(
+                        content,
+                        { y: 0 },
+                        {
+                            y: -60,
+                            ease: 'none',
+                            scrollTrigger: {
+                                trigger: section,
+                                start: 'top bottom',
+                                end: 'bottom top',
+                                scrub: 1.2,
+                            },
+                        }
+                    );
+                }
+            });
+
+            // === REVEAL GROUPS ===
+            gsap.utils.toArray<HTMLElement>('.reveal-group').forEach((group) => {
+                const items = group.querySelectorAll('.reveal-item');
+                gsap.fromTo(
+                    items,
+                    { opacity: 0, y: 50, scale: 0.96 },
+                    {
+                        opacity: 1,
+                        y: 0,
+                        scale: 1,
+                        ease: 'power3.out',
+                        duration: 1.1,
+                        stagger: 0.12,
+                        scrollTrigger: {
+                            trigger: group,
+                            start: 'top 75%',
+                            toggleActions: 'play none none reverse',
+                        },
+                    }
+                );
+            });
+        });
+
+        return () => ctx.revert();
+    }, []);
+
     return (
-        <main className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-[#0F172A] via-[#1E293B] to-[#0D0716] text-gray-300 px-6 py-20">
-            <div className="absolute inset-0 z-0">
-                <LightRays
-                    raysOrigin="top-center"
-                    raysColor="#00FFFF"
-                    raysSpeed={1.5}
-                    lightSpread={0.8}
-                    rayLength={1.2}
-                    followMouse={true}
-                    mouseInfluence={0.1}
-                    noiseAmount={0.1}
-                    distortion={0.05}
-                    className="absolute inset-0 w-full h-full pointer-events-none"
-                />
-            </div>
-            <h1 className="text-4xl font-bold mb-6">About Us</h1>
-            <p className="max-w-3xl text-center text-lg leading-relaxed">
-                At xSia System, we are dedicated to empowering businesses with intelligent systems and personalized support that grows with you. Our mission is to help you grow smarter and serve better through innovative technology solutions tailored to your unique needs.
-            </p>
+        <main className='relative text-[#F8FAFC] overflow-hidden'>
+            <HeroSection />
         </main>
     );
 }

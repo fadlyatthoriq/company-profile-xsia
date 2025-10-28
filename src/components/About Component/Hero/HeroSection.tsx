@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import LightRays from '@/components/LightRays';
-import GradientText from '@/components/Hero/GradientText';
+import GradientText from '@/components/Main Component/Hero/GradientText';
 
 export default function HeroSection() {
   return (
