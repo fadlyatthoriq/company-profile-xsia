@@ -42,7 +42,7 @@ export default function HeroSection() {
             {particles.map((particle) => (
               <div
                 key={particle.id}
-                className="absolute w-[5px] h-[5px] bg-cyan-300/40 rounded-full animate-float"
+                className="absolute w-[4px] h-[4px] bg-cyan-300/40 rounded-full animate-float"
                 style={{
                   left: particle.left,
                   top: particle.top,

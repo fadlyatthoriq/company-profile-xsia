@@ -1,6 +1,7 @@
 'use client';
 
 import Image from "next/image";
+import Link from "next/link";
 import { useEffect, useCallback, useState, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -46,7 +47,7 @@ export default function ProductsSection() {
       if (autoplayInterval.current) clearInterval(autoplayInterval.current);
       autoplayInterval.current = setInterval(() => {
         if (!isHovered.current) emblaApi.scrollNext();
-      }, 2000);
+      }, 4000);
     };
 
     const stopAutoplay = () => {
@@ -102,34 +103,38 @@ export default function ProductsSection() {
     {
       title: "Dock-RP",
       description:
-        "A robust resource planning system for warehouse and logistics operations, ensuring efficiency and real-time tracking.",
+        "ERP System Tailored for Shipyard Industries Keep Projects Profitable",
       color: "red",
       image: "/images/dock-rp-image1.jpg",
       spotlight: "rgba(212, 6, 6, 0.15)" as const,
+      link: "/products/dock-rp",
     },
     {
       title: "Shop-RP",
       description:
-        "Smart retail planning software that helps manage sales, inventory, and analytics with real-time precision.",
+        "Mini ERP for Stores, Shops, and Warehouses Simple, Fast, and Online",
       color: "pink",
       image: "/images/shop-rp-image1.jpg",
       spotlight: "rgba(236,72,153,0.15)" as const,
+      link: "/products/shop-rp",
     },
     {
       title: "School-RP",
       description:
-        "A complete academic resource platform for schools, simplifying scheduling, student data, and academic analytics.",
+        "Digital School Administration Made Simple",
       color: "emerald",
       image: "/images/school-rp-image1.jpg",
       spotlight: "rgba(16,185,129,0.15)" as const,
+      link: "/products/school-rp",
     },
     {
-      title: "Office-RP",
+      title: "Vessel Tracking System",
       description:
-        "Corporate resource planning suite that enhances collaboration, workflow automation, and HR management.",
+        "Monitor Ship Movements in Real-Time Anytime, Anywhere",
       color: "blue",
-      image: "/images/office-rp-image1.jpg",
+      image: "/images/vessels-tracking-image1.jpg",
       spotlight: "rgba(59,130,246,0.15)" as const,
+      link: "/products/vessel-tracking-system",
     },
   ];
 
@@ -207,16 +212,18 @@ export default function ProductsSection() {
                     </p>
                   </div>
 
-                  <button
-                    className={`mt-6 px-5 py-2.5 rounded-lg bg-${product.color}-400/5 text-${product.color}-300 font-medium 
-                      hover:bg-${product.color}-400/10 border border-${product.color}-400/10 hover:border-${product.color}-400/20
-                      transition-all duration-300 flex items-center gap-2 group/btn self-start`}
-                  >
-                    Learn More
-                    <span className="group-hover/btn:translate-x-0.5 transition-transform text-sm">
-                      →
-                    </span>
-                  </button>
+                  <Link href={product.link} passHref>
+                    <button
+                      className={`mt-6 px-5 py-2.5 rounded-lg bg-${product.color}-400/5 text-${product.color}-300 font-medium 
+                        hover:bg-${product.color}-400/10 border border-${product.color}-400/10 hover:border-${product.color}-400/20
+                        transition-all duration-300 flex items-center gap-2 group/btn self-start`}
+                    >
+                      Learn More
+                      <span className="group-hover/btn:translate-x-0.5 transition-transform text-sm">
+                        →
+                      </span>
+                    </button>
+                  </Link>
                 </SpotlightCard>
               </div>
             ))}

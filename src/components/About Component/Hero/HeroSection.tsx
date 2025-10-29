@@ -1,76 +1,114 @@
 'use client';
 
-import Link from 'next/link';
-import LightRays from '@/components/LightRays';
-import GradientText from '@/components/Main Component/Hero/GradientText';
+import { motion } from 'framer-motion';
+import { useEffect, useRef } from 'react';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-export default function HeroSection() {
-  return (
-    <section
-      id="hero"
-      data-parallax
-      className="relative flex flex-col items-center justify-center min-h-screen py-20 sm:py-28 lg:py-36 overflow-hidden 
-      bg-gradient-to-b from-[#0F172A] via-[#1E293B] to-[#0D0716]"
-    >
-      <div className="absolute inset-0 z-0">
-        <LightRays
-          raysOrigin="top-center"
-          raysColor="#00FFFF"
-          raysSpeed={1.5}
-          lightSpread={0.8}
-          rayLength={1.2}
-          followMouse={true}
-          mouseInfluence={0.1}
-          noiseAmount={0.1}
-          distortion={0.05}
-          className="absolute inset-0 w-full h-full pointer-events-none"
-        />
-      </div>
+gsap.registerPlugin(ScrollTrigger);
 
-      {/* Hero Content */}
-      <div className="parallax-content relative z-10 w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-8 sm:space-y-10">
-        <div className="reveal-group flex flex-col items-center space-y-8 sm:space-y-10">
+interface HeroSectionProps {
+    mounted: boolean;
+}
 
-          {/* Title */}
-          <h1 className="reveal-item text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight px-4">
-            <GradientText
-              colors={['#40ffaa', '#4079ff', '#40ffaa', '#4079ff', '#40ffaa']}
-              animationSpeed={5}
-              showBorder={false}
+export default function HeroSection({ mounted }: HeroSectionProps) {
+    const heroRef = useRef<HTMLDivElement | null>(null);
+
+    useEffect(() => {
+        if (!mounted) return;
+
+        const ctx = gsap.context(() => {
+            // === HERO PARALLAX ===
+            gsap.to(heroRef.current, {
+                scrollTrigger: {
+                    trigger: heroRef.current,
+                    start: 'top top',
+                    end: 'bottom top',
+                    scrub: 1,
+                },
+                y: 100,
+                opacity: 0.5,
+            });
+
+            // === FLOATING LIGHTS ===
+            gsap.to('.ambient-light-1', {
+                y: -30,
+                x: 20,
+                duration: 4,
+                repeat: -1,
+                yoyo: true,
+                ease: 'sine.inOut',
+            });
+
+            gsap.to('.ambient-light-2', {
+                y: 30,
+                x: -20,
+                duration: 5,
+                repeat: -1,
+                yoyo: true,
+                ease: 'sine.inOut',
+            });
+
+            ScrollTrigger.refresh();
+        });
+
+        return () => ctx.revert();
+    }, [mounted]);
+
+    return (
+        <section ref={heroRef} className="relative flex flex-col items-center justify-center text-center px-6 md:px-12 lg:px-20 py-32 overflow-hidden">
+            {/* Enhanced Ambient Lights with Animation */}
+            <div className="ambient-light-1 absolute top-0 left-1/4 w-96 h-96 bg-cyan-500/20 rounded-full blur-[140px]" />
+            <div className="ambient-light-2 absolute bottom-0 right-1/4 w-96 h-96 bg-purple-500/20 rounded-full blur-[140px]" />
+
+            {/* Floating particles - only render on client */}
+            {mounted && (
+                <div className="absolute inset-0 overflow-hidden pointer-events-none">
+                    {[...Array(20)].map((_, i) => (
+                        <motion.div
+                            key={i}
+                            className="absolute w-1 h-1 bg-cyan-400/30 rounded-full"
+                            style={{
+                                left: `${(i * 7 + 15) % 100}%`,
+                                top: `${(i * 11 + 10) % 100}%`,
+                            }}
+                            animate={{
+                                y: [0, -30, 0],
+                                opacity: [0, 1, 0],
+                            }}
+                            transition={{
+                                duration: 3 + (i % 3),
+                                repeat: Infinity,
+                                delay: i * 0.1,
+                            }}
+                        />
+                    ))}
+                </div>
+            )}
+
+            <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8 }}
+                className="max-w-3xl relative z-10"
             >
-              Grow Smarter, Serve Better
-            </GradientText>
-          </h1>
+                <motion.div
+                    initial={{ scale: 0.9 }}
+                    animate={{ scale: 1 }}
+                    transition={{ duration: 0.5, delay: 0.2 }}
+                    className="inline-block mb-4 px-4 py-2 bg-cyan-500/10 border border-cyan-500/30 rounded-full text-cyan-300 text-sm font-medium"
+                >
+                    ✨ Innovative IT Solutions Since 2013
+                </motion.div>
 
-          {/* Subtitle */}
-          <p className="reveal-item text-[#94A3B8] text-base sm:text-lg md:text-xl max-w-2xl mx-auto leading-relaxed px-4">
-            Empowering businesses with intelligent systems and personal support that grows with you.
-          </p>
-
-          {/* CTA Buttons - Responsive */}
-          <div className="reveal-item w-full flex flex-col sm:flex-row gap-4 sm:gap-5 justify-center items-center px-4 max-w-md sm:max-w-none mx-auto">
-            <Link
-              href="#contact"
-              className="group w-full sm:w-auto px-8 sm:px-10 h-12 sm:h-14 rounded-full flex items-center justify-center gap-x-3 
-                    bg-[#00FFFF]/20 border border-[#00FFFF]/40 text-[#F8FAFC] font-semibold text-base sm:text-lg 
-                    hover:shadow-[0_0_30px_#00FFFF80] hover:scale-105 transition-all duration-300 ease-out"
-            >
-              Let&apos;s talk
-            </Link>
-
-            <Link
-              href="#projects-overview"
-              className="w-full sm:w-auto px-8 sm:px-10 h-12 sm:h-14 rounded-full flex items-center justify-center
-                    bg-[#1E293B]/80 border border-[#38BDF8]/20 
-                    text-[#F8FAFC] font-semibold text-base sm:text-lg 
-                    hover:bg-[#1E293B]/60 hover:border-[#38BDF8]/40 
-                    transition-all duration-300"
-            >
-              View Services
-            </Link>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
+                <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 bg-clip-text text-transparent leading-tight">
+                    About PT xSiA Sistem
+                </h1>
+                <p className="text-gray-300 text-lg md:text-xl leading-relaxed max-w-2xl mx-auto">
+                    Empowering industries with smart and affordable IT solutions.
+                    We believe innovation should be accessible for everyone, helping businesses grow efficiently and sustainably.
+                </p>
+            </motion.div>
+        </section>
+    );
 }
