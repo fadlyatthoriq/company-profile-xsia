@@ -1,13 +1,10 @@
 'use client';
 
-import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-// Tambahkan import untuk ProfileCard dari React Bits
-// Asumsikan Anda telah menginstal atau menyalin kode React Bits
-import ProfileCard from '@/components/ProfileCard'; // Sesuaikan path jika berbeda
+import ProfileCard from '@/components/ProfileCard';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -16,12 +13,11 @@ export default function CeoSection() {
 
     useEffect(() => {
         const ctx = gsap.context(() => {
-            // === CEO SECTION ===
-            const ceoImage = ceoRef.current?.querySelector('.ceo-image'); // Sekarang merujuk ke root ProfileCard
+            const ceoCard = ceoRef.current?.querySelector('.ceo-card');
             const ceoBio = ceoRef.current?.querySelector('.ceo-bio');
 
-            if (ceoImage) {
-                gsap.from(ceoImage, {
+            if (ceoCard) {
+                gsap.from(ceoCard, {
                     scrollTrigger: {
                         trigger: ceoRef.current,
                         start: 'top 80%',
@@ -77,16 +73,33 @@ export default function CeoSection() {
                 </div>
 
                 <div className="grid md:grid-cols-2 gap-12 items-center">
-                    {/* CEO IMAGE - Diganti dengan ProfileCard dari React Bits */}
-                    <div className="ceo-image">
+                    {/* CEO ProfileCard */}
+                    <div className="ceo-card flex justify-center">
                         <ProfileCard
-                            name="Catur Diantono"
-                            title="Founder & Chief Executive Officer"
                             avatarUrl="/images/profile.jpg"
-                            iconUrl="/images/profile.jpg"
+                            miniAvatarUrl="/images/profile.jpg"
+                            name="Catur Diantono"
+                            title="Founder & CEO"
+                            handle="catur.diantono"
+                            status="Leading Innovation"
+                            contactText="Contact Me"
                             showUserInfo={false}
                             enableTilt={true}
                             enableMobileTilt={false}
+                            showBehindGradient={true}
+                            behindGradient="radial-gradient(farthest-side circle at var(--pointer-x) var(--pointer-y),
+                                hsla(230, 100%, 92%, var(--card-opacity)) 4%,
+                                hsla(250, 70%, 85%, calc(var(--card-opacity) * 0.8)) 10%,
+                                hsla(260, 40%, 70%, calc(var(--card-opacity) * 0.5)) 50%,
+                                hsla(250, 30%, 50%, 0) 100%
+                            ),
+                            radial-gradient(35% 52% at 55% 20%, #00e0ffcc 0%, #170d2700 100%),
+                            radial-gradient(100% 100% at 50% 50%, #9b5effff 1%, #170d2700 76%),
+                            conic-gradient(from 124deg at 50% 50%, #6b21ff 0%, #00e0ff 40%, #00e0ff 60%, #6b21ff 100%)"
+                            innerGradient="linear-gradient(145deg, #1E293B88 0%, #3B82F64D 50%, #8B5CF64D 100%)"
+                            onContactClick={() => {
+                                window.location.href = 'mailto:catur@xsia.com';
+                            }}
                         />
                     </div>
 
