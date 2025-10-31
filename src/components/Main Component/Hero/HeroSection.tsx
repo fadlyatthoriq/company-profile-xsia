@@ -16,7 +16,6 @@ interface Particle {
 export default function HeroSection() {
   const [particles, setParticles] = useState<Particle[] | null>(null);
 
-  // Generate partikel hanya di client setelah mount
   useEffect(() => {
     const generatedParticles: Particle[] = Array.from({ length: 50 }).map((_, i) => ({
       id: i,
@@ -36,7 +35,6 @@ export default function HeroSection() {
     >
       {/* Background Effects */}
       <div className="absolute inset-0 z-0">
-        {/* Render partikel hanya setelah mount (client-side) */}
         {particles && (
           <div className="absolute inset-0">
             {particles.map((particle) => (

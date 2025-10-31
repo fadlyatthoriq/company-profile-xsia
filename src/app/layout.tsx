@@ -28,7 +28,6 @@ const navItems: CardNavItem[] = [
       { label: "Home", ariaLabel: "Home Page", href: "/" },
       { label: "About", ariaLabel: "About Company", href: "/about" },
       { label: "Service", ariaLabel: "Our Services", href: "/#projects-overview" },
-      { label: "Products", ariaLabel: "Our Products", href: "/#our-products" },
       { label: "Contact Us", ariaLabel: "Contact Us", href: "/#contact" },
 
     ],

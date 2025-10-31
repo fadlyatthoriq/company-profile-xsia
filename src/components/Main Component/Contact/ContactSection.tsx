@@ -1,12 +1,21 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function ContactSection() {
+  const [loading, setLoading] = useState(false);
+  const [status, setStatus] = useState<string | null>(null);
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    subject: '',
+    message: ''
+  });
+
   useEffect(() => {
     const ctx = gsap.context(() => {
       const contact = document.querySelector('#contact');
@@ -70,6 +79,68 @@ export default function ContactSection() {
 
     return () => ctx.revert();
   }, []);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setLoading(true);
+    setStatus(null);
+
+    // Validasi form
+    if (!formData.name || !formData.email || !formData.subject || !formData.message) {
+      setStatus('❌ Please fill in all fields.');
+      setLoading(false);
+      return;
+    }
+
+    // Validasi email format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.email)) {
+      setStatus('❌ Please enter a valid email address.');
+      setLoading(false);
+      return;
+    }
+
+    try {
+      console.log('Sending email with data:', formData);
+      
+      const res = await fetch('/api/send', {
+        method: 'POST',
+        headers: { 
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const result = await res.json();
+      console.log('Response:', result);
+
+      if (res.ok && result.success) {
+        setStatus('✅ Message sent successfully! We\'ll get back to you soon.');
+        // Reset form
+        setFormData({
+          name: '',
+          email: '',
+          subject: '',
+          message: ''
+        });
+      } else {
+        setStatus(`❌ Failed to send message: ${result.error || 'Unknown error'}`);
+      }
+    } catch (err) {
+      console.error("Something went wrong:", err);
+      setStatus('❌ Network error. Please check your connection and try again.');
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <section
@@ -204,27 +275,35 @@ export default function ContactSection() {
               Send Us a Message
             </h3>
 
-            <form className="space-y-6">
+            <form className="space-y-6" onSubmit={handleSubmit}>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                   <label htmlFor="name" className="block text-gray-300 font-medium mb-2">
-                    Full Name
+                    Full Name <span className="text-red-400">*</span>
                   </label>
                   <input
                     type="text"
+                    name="name"
                     id="name"
+                    value={formData.name}
+                    onChange={handleChange}
                     placeholder="Your name"
+                    required
                     className="w-full px-4 py-3 bg-[#12182A] border border-white/10 rounded-lg text-gray-100 focus:outline-none focus:ring-2 focus:ring-cyan-400 transition"
                   />
                 </div>
                 <div>
                   <label htmlFor="email" className="block text-gray-300 font-medium mb-2">
-                    Email Address
+                    Email Address <span className="text-red-400">*</span>
                   </label>
                   <input
                     type="email"
+                    name="email"
                     id="email"
+                    value={formData.email}
+                    onChange={handleChange}
                     placeholder="your@email.com"
+                    required
                     className="w-full px-4 py-3 bg-[#12182A] border border-white/10 rounded-lg text-gray-100 focus:outline-none focus:ring-2 focus:ring-cyan-400 transition"
                   />
                 </div>
@@ -232,34 +311,49 @@ export default function ContactSection() {
 
               <div>
                 <label htmlFor="subject" className="block text-gray-300 font-medium mb-2">
-                  Subject
+                  Subject <span className="text-red-400">*</span>
                 </label>
                 <input
                   type="text"
+                  name="subject"
                   id="subject"
+                  value={formData.subject}
+                  onChange={handleChange}
                   placeholder="What is this regarding?"
+                  required
                   className="w-full px-4 py-3 bg-[#12182A] border border-white/10 rounded-lg text-gray-100 focus:outline-none focus:ring-2 focus:ring-cyan-400 transition"
                 />
               </div>
 
               <div>
                 <label htmlFor="message" className="block text-gray-300 font-medium mb-2">
-                  Message
+                  Message <span className="text-red-400">*</span>
                 </label>
                 <textarea
                   id="message"
+                  name="message"
                   rows={5}
+                  value={formData.message}
+                  onChange={handleChange}
                   placeholder="Tell us about your project..."
+                  required
                   className="w-full px-4 py-3 bg-[#12182A] border border-white/10 rounded-lg text-gray-100 focus:outline-none focus:ring-2 focus:ring-cyan-400 transition resize-none"
                 />
               </div>
 
               <button
                 type="submit"
-                className="w-full py-4 bg-gradient-to-r from-cyan-500 to-blue-500 text-white text-lg font-medium rounded-lg hover:opacity-90 transition-all duration-300 shadow-lg shadow-cyan-900/40"
+                disabled={loading}
+                className="w-full py-4 bg-gradient-to-r from-cyan-500 to-blue-500 text-white text-lg font-medium rounded-lg hover:opacity-90 transition-all duration-300 shadow-lg shadow-cyan-900/40 disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                Send Message
+                {loading ? 'Sending...' : 'Send Message'}
               </button>
+
+              {status && (
+                <div className={`p-4 rounded-lg ${status.includes('✅') ? 'bg-green-500/10 border border-green-500/30' : 'bg-red-500/10 border border-red-500/30'}`}>
+                  <p className="text-center text-sm">{status}</p>
+                </div>
+              )}
             </form>
           </div>
         </div>

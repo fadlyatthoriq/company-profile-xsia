@@ -38,7 +38,7 @@ const CardNav: React.FC<CardNavProps> = ({
   items,
   className = '',
   ease = 'power3.out',
-  baseColor = 'rgba(17, 24, 39, 0.8)', // semi transparan dark slate bg
+  baseColor = 'rgba(17, 24, 39, 0.8)',
   menuColor = '#e2e8f0',
   buttonBgColor = 'linear-gradient(135deg, #4F46E5, #06B6D4)',
   buttonTextColor = '#fff'
