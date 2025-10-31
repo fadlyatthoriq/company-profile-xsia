@@ -16,7 +16,6 @@ export default function ContactSection() {
       const contactItems = contact.querySelectorAll('.contact-item');
       const form = contact.querySelector('form');
 
-      // === Heading fade-in (judul dan paragraf pembuka) ===
       gsap.from(heading, {
         opacity: 0,
         y: 50,
@@ -69,7 +68,6 @@ export default function ContactSection() {
       });
     });
 
-    // Cleanup animasi & scroll triggers dengan aman
     return () => ctx.revert();
   }, []);
 

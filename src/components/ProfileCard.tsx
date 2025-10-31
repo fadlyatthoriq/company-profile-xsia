@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useCallback, useMemo } from 'react';
 import './ProfileCard.css';
 
+import Image from 'next/image';
+
 interface ProfileCardProps {
   avatarUrl: string;
   iconUrl?: string;
@@ -219,15 +221,17 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
 
     const handleClick = () => {
       if (!enableMobileTilt || location.protocol !== 'https:') return;
-      if (typeof (window.DeviceMotionEvent as any).requestPermission === 'function') {
-        (window.DeviceMotionEvent as any)
-          .requestPermission()
-          .then((state: string) => {
+      if ('requestPermission' in window.DeviceMotionEvent) {
+        (window.DeviceMotionEvent as {
+          requestPermission?: () => Promise<PermissionState>;
+        })
+          .requestPermission?.()
+          .then((state) => {
             if (state === 'granted') {
               window.addEventListener('deviceorientation', deviceOrientationHandler);
             }
           })
-          .catch((err: any) => console.error(err));
+          .catch((err: unknown) => console.error(err));
       } else {
         window.addEventListener('deviceorientation', deviceOrientationHandler);
       }
@@ -284,13 +288,14 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
           <div className="pc-shine" />
           <div className="pc-glare" />
           <div className="pc-content pc-avatar-content">
-            <img
+            <Image
               className="avatar"
               src={avatarUrl}
               alt={`${name || 'User'} avatar`}
-              loading="lazy"
-              onError={e => {
-                const target = e.target as HTMLImageElement;
+              width={200}
+              height={200}
+              onError={(e) => {
+                const target = e.currentTarget as HTMLImageElement;
                 target.style.display = 'none';
               }}
             />
@@ -298,12 +303,14 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
               <div className="pc-user-info">
                 <div className="pc-user-details">
                   <div className="pc-mini-avatar">
-                    <img
+                    <Image
                       src={miniAvatarUrl || avatarUrl}
                       alt={`${name || 'User'} mini avatar`}
-                      loading="lazy"
-                      onError={e => {
-                        const target = e.target as HTMLImageElement;
+                      width={40}
+                      height={40}
+                      className="mini-avatar"
+                      onError={(e) => {
+                        const target = e.currentTarget as HTMLImageElement;
                         target.style.opacity = '0.5';
                         target.src = avatarUrl;
                       }}

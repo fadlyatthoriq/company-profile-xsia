@@ -1,5 +1,6 @@
 'use client';
 
+import { useCallback } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import React, { useLayoutEffect, useRef, useState } from 'react';
@@ -48,34 +49,39 @@ const CardNav: React.FC<CardNavProps> = ({
   const cardsRef = useRef<HTMLDivElement[]>([]);
   const tlRef = useRef<gsap.core.Timeline | null>(null);
 
-  const calculateHeight = () => {
-    const navEl = navRef.current;
-    if (!navEl) return 260;
-    const isMobile = window.matchMedia('(max-width: 768px)').matches;
-    if (isMobile) {
-      const contentEl = navEl.querySelector('.card-nav-content') as HTMLElement;
-      if (contentEl) {
-        const prev = {
-          visibility: contentEl.style.visibility,
-          pointerEvents: contentEl.style.pointerEvents,
-          position: contentEl.style.position,
-          height: contentEl.style.height
-        };
-        contentEl.style.visibility = 'visible';
-        contentEl.style.pointerEvents = 'auto';
-        contentEl.style.position = 'static';
-        contentEl.style.height = 'auto';
-        const contentHeight = contentEl.scrollHeight;
-        Object.assign(contentEl.style, prev);
-        return 60 + contentHeight + 16;
-      }
-    }
-    return 260;
-  };
-
-  const createTimeline = () => {
+  const createTimeline = useCallback(() => {
     const navEl = navRef.current;
     if (!navEl) return null;
+
+    const calculateHeight = () => {
+      const navEl = navRef.current;
+      if (!navEl) return 260;
+
+      const isMobile = window.matchMedia('(max-width: 768px)').matches;
+      if (isMobile) {
+        const contentEl = navEl.querySelector('.card-nav-content') as HTMLElement;
+        if (contentEl) {
+          const prev = {
+            visibility: contentEl.style.visibility,
+            pointerEvents: contentEl.style.pointerEvents,
+            position: contentEl.style.position,
+            height: contentEl.style.height,
+          };
+
+          contentEl.style.visibility = 'visible';
+          contentEl.style.pointerEvents = 'auto';
+          contentEl.style.position = 'static';
+          contentEl.style.height = 'auto';
+
+          const contentHeight = contentEl.scrollHeight;
+
+          Object.assign(contentEl.style, prev);
+          return 60 + contentHeight + 16;
+        }
+      }
+
+      return 270;
+    };
 
     gsap.set(navEl, { height: 60, overflow: 'hidden' });
     gsap.set(cardsRef.current, { y: 40, opacity: 0 });
@@ -83,8 +89,11 @@ const CardNav: React.FC<CardNavProps> = ({
     const tl = gsap.timeline({ paused: true });
     tl.to(navEl, { height: calculateHeight, duration: 0.4, ease });
     tl.to(cardsRef.current, { y: 0, opacity: 1, duration: 0.4, ease, stagger: 0.08 }, '-=0.1');
+
     return tl;
-  };
+  }, [ease]);
+
+
 
   useLayoutEffect(() => {
     const tl = createTimeline();
@@ -93,7 +102,9 @@ const CardNav: React.FC<CardNavProps> = ({
       tl?.kill();
       tlRef.current = null;
     };
-  }, [ease, items]);
+  }, [createTimeline]);
+
+
 
   const toggleMenu = () => {
     const tl = tlRef.current;
@@ -196,6 +207,14 @@ const CardNav: React.FC<CardNavProps> = ({
                       href={lnk.href}
                       aria-label={lnk.ariaLabel}
                       className="flex items-center gap-2 text-sm text-slate-300 hover:text-cyan-400 hover:translate-x-1 transition-all duration-200 group/link"
+                      onClick={() => {
+                        const tl = tlRef.current;
+                        if (tl) {
+                          tl.eventCallback('onReverseComplete', () => setIsExpanded(false));
+                          tl.reverse();
+                        }
+                        setIsHamburgerOpen(false);
+                      }}
                     >
                       <GoArrowUpRight className="text-base opacity-70 group-hover/link:opacity-100" />
                       <span className="font-medium">{lnk.label}</span>
