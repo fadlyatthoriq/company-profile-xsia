@@ -1,5 +1,5 @@
 import { notFound } from 'next/navigation';
-import ProductClient from '@/app/products/[slug]/ProductClient';
+import ProductClient from '@/components/Product Component/ProductClient';
 
 type Feature = {
   icon: string;
