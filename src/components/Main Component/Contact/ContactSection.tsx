@@ -93,14 +93,12 @@ export default function ContactSection() {
     setLoading(true);
     setStatus(null);
 
-    // Validasi form
     if (!formData.name || !formData.email || !formData.subject || !formData.message) {
       setStatus('❌ Please fill in all fields.');
       setLoading(false);
       return;
     }
 
-    // Validasi email format
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(formData.email)) {
       setStatus('❌ Please enter a valid email address.');

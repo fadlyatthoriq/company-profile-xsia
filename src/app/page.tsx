@@ -13,7 +13,6 @@ gsap.registerPlugin(ScrollTrigger);
 export default function Home() {
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // === PARALLAX SECTION ===
       gsap.utils.toArray<HTMLElement>('section[data-parallax]').forEach((section) => {
         const content = section.querySelector('.parallax-content');
         if (content) {
@@ -34,7 +33,6 @@ export default function Home() {
         }
       });
 
-      // === REVEAL GROUPS ===
       gsap.utils.toArray<HTMLElement>('.reveal-group').forEach((group) => {
         const items = group.querySelectorAll('.reveal-item');
         gsap.fromTo(

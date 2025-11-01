@@ -66,7 +66,6 @@ export default function ProductsSection() {
     };
   }, [emblaApi, onSelect]);
 
-  // ✅ ScrollTrigger animation
   useEffect(() => {
     const el = document.querySelector(".product-header");
     if (!el) return;
@@ -82,7 +81,6 @@ export default function ProductsSection() {
         scrollTrigger: {
           trigger: el,
           start: "top 80%",
-          once: true, 
         },
       }
     );

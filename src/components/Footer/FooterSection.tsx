@@ -55,9 +55,10 @@ export default function FooterSection() {
               {
                 title: 'Our Products',
                 links: [
-                  ['Dock-RP', '/dockrp-productpage'],
-                  ['Shop-RP', '/shoprp-productpage'],
-                  ['School-RP', '/schoolrp-productpage'],
+                  ['Dock-RP', '/products/dock-rp'],
+                  ['Shop-RP', '/products/shop-rp'],
+                  ['School-RP', '/products/school-rp'],
+                  ['Vessels Tracking', '/products/vessels-tracking'],
                 ],
               },
               {

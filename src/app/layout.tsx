@@ -37,9 +37,10 @@ const navItems: CardNavItem[] = [
     bgColor: "#1E293B",
     textColor: "#F8FAFC",
     links: [
-       { label: "Dock-RP", ariaLabel: "About Dock-RP", href: "/dockrp-productpage" },
-       { label: "Shop-RP", ariaLabel: "About Shop-RP", href: "/shoprp-productpage" },
-       { label: "School-RP", ariaLabel: "About School-RP", href: "/schoolrp-productpage" },
+       { label: "Dock-RP", ariaLabel: "About Dock-RP", href: "/products/dock-rp" },
+       { label: "Shop-RP", ariaLabel: "About Shop-RP", href: "/products/shop-rp" },
+       { label: "School-RP", ariaLabel: "About School-RP", href: "/products/school-rp" },
+       { label: "Vessels Tracking", ariaLabel: "About Vessels Tracking", href: "/products/vessels-tracking" },
     ],
   },
 ];
