@@ -19,6 +19,8 @@ import {
   FiUsers,
   FiMessageSquare,
   FiCheck,
+  FiArrowRight,
+  FiPlay,
 } from 'react-icons/fi';
 import { MdStore } from 'react-icons/md';
 import {
@@ -27,15 +29,7 @@ import {
   FaChalkboardTeacher,
   FaRocket,
 } from 'react-icons/fa';
-import AnimatedOrbs from './AnimatedOrbs';
-import HeroGridOverlay from './HeroGridOverlay';
 
-type HeroSectionProps = {
-  title: string;
-  subtitle: string;
-};
-
-// 🔹 Icon Map
 const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   GiSatelliteCommunication,
   GiAnchor,
@@ -57,6 +51,16 @@ const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   FaSchool,
   FaUserGraduate,
   FaChalkboardTeacher,
+  FiArrowRight,
+  FiPlay,
+};
+
+import AnimatedOrbs from './AnimatedOrbs';
+import HeroGridOverlay from './HeroGridOverlay';
+
+type HeroSectionProps = {
+  title: string;
+  subtitle: string;
 };
 
 // 🔹 Helper: Render Icon

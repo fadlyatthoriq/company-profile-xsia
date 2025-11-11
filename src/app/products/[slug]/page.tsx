@@ -30,11 +30,6 @@ const products: Record<string, Product> = {
       { icon: 'GiCompass', text: 'Trip analytics for every vessel' },
       { icon: 'FiBarChart', text: 'Access operational reports from anywhere' },
     ],
-    futurePlans: [
-      'AI-based congestion prediction',
-      'Pattern recognition for movement optimization',
-      'Smart alerts for unusual vessel behavior',
-    ],
     closingLine:
       'Vessel Tracking System — transforming manual supervision into smart, data-driven operations.',
   },
